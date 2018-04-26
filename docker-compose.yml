@@ -1,0 +1,7 @@
+version: '3'
+services:
+  api:
+    image: covalisage
+    build:
+      context: ./api
+      dockerfile: Dockerfile
