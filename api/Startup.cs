@@ -43,6 +43,7 @@ namespace api
               services.AddDbContext<UserDbContext>( Opt =>
              Opt.UseSqlServer(Configuration.GetConnectionString("COVALISAGE_DB_CONN")) );
              services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserDbContext>();
+             services.BuildServiceProvider().GetService<UserDbContext>().Database.Migrate();
              var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is the secret phrase"));
 
             services.AddAuthentication(options =>
