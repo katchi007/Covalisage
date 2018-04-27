@@ -1,7 +1,7 @@
 version: '3'
 services:
   covalisage:
-    image: covalisage
+    image: sefi007/covalisage
     build:
       context: .
       dockerfile: DockerFile
