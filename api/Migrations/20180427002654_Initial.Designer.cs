@@ -8,18 +8,48 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace covalisage.Migrations.UserDb
+namespace api.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20180408225318_UserTable")]
-    partial class UserTable
+    [Migration("20180427002654_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("covalisage.Domain.Annonce", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Note");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<DateTime>("dateArrivee");
+
+                    b.Property<DateTime>("dateDepart");
+
+                    b.Property<string>("lieuArrivee");
+
+                    b.Property<string>("lieuDepart");
+
+                    b.Property<int>("poidDisponible");
+
+                    b.Property<decimal>("prixKg");
+
+                    b.Property<string>("titre");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Annonce");
+                });
 
             modelBuilder.Entity("covalisage.Domain.User", b =>
                 {
@@ -80,7 +110,8 @@ namespace covalisage.Migrations.UserDb
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -103,7 +134,8 @@ namespace covalisage.Migrations.UserDb
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -190,6 +222,13 @@ namespace covalisage.Migrations.UserDb
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("covalisage.Domain.Annonce", b =>
+                {
+                    b.HasOne("covalisage.Domain.User")
+                        .WithMany("annonces")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

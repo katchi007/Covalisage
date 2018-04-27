@@ -38,10 +38,10 @@ namespace api
             }));
 
             
-            services.AddEntityFrameworkNpgsql().AddDbContext<MyWebApiContext>( Opt =>
-             Opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConnection")) );
-              services.AddEntityFrameworkNpgsql().AddDbContext<UserDbContext>( Opt =>
-             Opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConnection")) );
+            services.AddDbContext<MyWebApiContext>( Opt =>
+             Opt.UseSqlServer(Configuration.GetConnectionString("MyWebApiConnection")) );
+              services.AddDbContext<UserDbContext>( Opt =>
+             Opt.UseSqlServer(Configuration.GetConnectionString("MyWebApiConnection")) );
              services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserDbContext>();
              var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is the secret phrase"));
 
@@ -66,8 +66,9 @@ namespace api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserDbContext context)
         {
+            context.Database.Migrate();
             app.UseAuthentication();
             if (env.IsDevelopment())
             {
