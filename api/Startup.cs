@@ -39,9 +39,9 @@ namespace api
 
             
             services.AddDbContext<MyWebApiContext>( Opt =>
-             Opt.UseSqlServer(Configuration.GetConnectionString("MyWebApiConnection")) );
+             Opt.UseSqlServer(Configuration.GetConnectionString("COVALISAGE_DB_CONN")) );
               services.AddDbContext<UserDbContext>( Opt =>
-             Opt.UseSqlServer(Configuration.GetConnectionString("MyWebApiConnection")) );
+             Opt.UseSqlServer(Configuration.GetConnectionString("COVALISAGE_DB_CONN")) );
              services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserDbContext>();
              var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this is the secret phrase"));
 
