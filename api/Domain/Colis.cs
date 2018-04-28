@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace covalisage.Domain
+namespace api.Domain
 {
     public class Colis
     {

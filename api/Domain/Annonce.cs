@@ -1,6 +1,6 @@
 using System;
 
-namespace covalisage.Domain
+namespace api.Domain
 {
     public class Annonce
     {

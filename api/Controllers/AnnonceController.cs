@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using covalisage.Domain;
+using api.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace covalisage.Controllers
+namespace api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
     public class AnnonceController : Controller
     {
-        readonly MyWebApiContext _context;
-        public AnnonceController(MyWebApiContext context)
+        readonly CovalisageContext _context;
+        public AnnonceController(CovalisageContext context)
         {
             _context = context;
         }

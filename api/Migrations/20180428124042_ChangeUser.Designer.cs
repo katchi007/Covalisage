@@ -11,8 +11,8 @@ using System;
 namespace api.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20180427002654_Initial")]
-    partial class Initial
+    [Migration("20180428124042_ChangeUser")]
+    partial class ChangeUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace api.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("covalisage.Domain.Annonce", b =>
+            modelBuilder.Entity("api.Domain.Annonce", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -51,14 +51,14 @@ namespace api.Migrations
                     b.ToTable("Annonce");
                 });
 
-            modelBuilder.Entity("covalisage.Domain.User", b =>
+            modelBuilder.Entity("api.Domain.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("CIN");
+                    b.Property<string>("Adresse");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -69,8 +69,6 @@ namespace api.Migrations
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<string>("FirstName");
-
-                    b.Property<string>("Gender");
 
                     b.Property<string>("LastName");
 
@@ -90,8 +88,6 @@ namespace api.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("PictureUrl");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<string>("Tel");
@@ -100,8 +96,6 @@ namespace api.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
-
-                    b.Property<string>("passeport");
 
                     b.HasKey("Id");
 
@@ -224,9 +218,9 @@ namespace api.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("covalisage.Domain.Annonce", b =>
+            modelBuilder.Entity("api.Domain.Annonce", b =>
                 {
-                    b.HasOne("covalisage.Domain.User")
+                    b.HasOne("api.Domain.User")
                         .WithMany("annonces")
                         .HasForeignKey("UserId");
                 });
@@ -241,7 +235,7 @@ namespace api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("covalisage.Domain.User")
+                    b.HasOne("api.Domain.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -249,7 +243,7 @@ namespace api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("covalisage.Domain.User")
+                    b.HasOne("api.Domain.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -262,7 +256,7 @@ namespace api.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("covalisage.Domain.User")
+                    b.HasOne("api.Domain.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -270,7 +264,7 @@ namespace api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("covalisage.Domain.User")
+                    b.HasOne("api.Domain.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

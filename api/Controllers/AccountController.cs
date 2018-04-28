@@ -2,12 +2,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using covalisage.Domain;
+using api.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-namespace covalisage.Controllers
+namespace api.Controllers
 {
     [Produces("application/json")]
     [Route("api/Account")]
@@ -23,7 +23,8 @@ namespace covalisage.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] Credential credential)
         {
-            var user = new User{ Email = credential.email, UserName = credential.email};
+            var user = new User{ Email = credential.email, UserName = credential.email,FirstName= credential.firstName,
+            LastName= credential.lastName,Tel= credential.tel, Adresse = credential.adresse };
             var result = await userManager.CreateAsync(user, credential.password);
             if(!result.Succeeded)
              return BadRequest(result.Errors);
