@@ -18,27 +18,28 @@ namespace api.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public IEnumerable<Annonce> GetAllAnnonces()
         {
              return _context.Annonces.ToList();
         }
 
-       // [Authorize]
+       [Authorize]
         [HttpGet]
         public IEnumerable<Annonce> GetUserAnnonces()
         {
+            
             var userId = HttpContext.User.Claims.First().Value;
             return _context.Annonces.Where(a => a.UserId == userId);
         }
 
         // GET api/values/5
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetAnnonceById([FromRoute] int annonceId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAnnonceById(int id)
         {
             if(!ModelState.IsValid)
               return BadRequest(ModelState);
-            var annonce = await _context.Annonces.SingleOrDefaultAsync(a => a.Id == annonceId);
+            var annonce = await _context.Annonces.SingleOrDefaultAsync(a => a.Id == id);
             if(annonce == null)
                return NotFound();
 
@@ -46,7 +47,7 @@ namespace api.Controllers
         }
 
         // POST api/values
-       // [Authorize]
+       [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostAnnonce([FromBody] Annonce annonce)
         {
@@ -60,8 +61,9 @@ namespace api.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{Id}")]
-        public async Task<IActionResult> PutAnnonce([FromRoute] int id, [FromBody]Annonce annonce)
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAnnonce(int id, [FromBody]Annonce annonce)
         {
             if(!ModelState.IsValid)
               return BadRequest(ModelState);
@@ -92,8 +94,9 @@ namespace api.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> DeleteAnnonce([FromRoute] int id)
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAnnonce( int id)
         {
             if(!ModelState.IsValid)
               return BadRequest(ModelState);
