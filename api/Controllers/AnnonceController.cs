@@ -19,7 +19,6 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public IEnumerable<Annonce> GetAllAnnonces()
         {
              return _context.Annonces.ToList();
@@ -27,7 +26,6 @@ namespace api.Controllers
 
         [Authorize]
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public IEnumerable<Annonce> GetUserAnnonces()
         {
             var userId = HttpContext.User.Claims.First().Value;
@@ -36,7 +34,6 @@ namespace api.Controllers
 
         // GET api/values/5
         [HttpGet("{Id}")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> GetAnnonceById([FromRoute] int annonceId)
         {
             if(!ModelState.IsValid)
@@ -51,7 +48,6 @@ namespace api.Controllers
         // POST api/values
         [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> PostAnnonce([FromBody] Annonce annonce)
         {
             if(!ModelState.IsValid)
@@ -65,7 +61,6 @@ namespace api.Controllers
 
         // PUT api/values/5
         [HttpPut("{Id}")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> PutAnnonce([FromRoute] int id, [FromBody]Annonce annonce)
         {
             if(!ModelState.IsValid)
@@ -98,7 +93,6 @@ namespace api.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{Id}")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteAnnonce([FromRoute] int id)
         {
             if(!ModelState.IsValid)
