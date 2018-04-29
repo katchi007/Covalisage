@@ -24,7 +24,7 @@ namespace api.Controllers
              return _context.Annonces.ToList();
         }
 
-        [Authorize]
+       // [Authorize]
         [HttpGet]
         public IEnumerable<Annonce> GetUserAnnonces()
         {
@@ -46,7 +46,7 @@ namespace api.Controllers
         }
 
         // POST api/values
-        [Authorize]
+       // [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostAnnonce([FromBody] Annonce annonce)
         {
