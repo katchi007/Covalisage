@@ -9,8 +9,8 @@ namespace api.Domain
         public string titre { get; set; }
         public int poidDisponible { get; set; }
         public decimal prixKg { get; set; }
-        public DateTime dateDepart { get; set; }
-        public DateTime dateArrivee { get; set; }
+        public string dateDepart { get; set; }
+        public string dateArrivee { get; set; }
         public string lieuDepart { get; set; }
         public string lieuArrivee { get; set; }
         public string Note { get; set; }

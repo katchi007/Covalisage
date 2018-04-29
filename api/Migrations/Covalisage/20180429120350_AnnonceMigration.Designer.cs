@@ -11,9 +11,10 @@ using System;
 namespace api.Migrations.Covalisage
 {
     [DbContext(typeof(CovalisageContext))]
-    partial class CovalisageContextModelSnapshot : ModelSnapshot
+    [Migration("20180429120350_AnnonceMigration")]
+    partial class AnnonceMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
