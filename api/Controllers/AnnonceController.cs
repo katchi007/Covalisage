@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
-    [Produces("application/json")]
     [Route("api/[controller]")]
     public class AnnonceController : Controller
     {
@@ -18,7 +17,7 @@ namespace api.Controllers
             _context = context;
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         public IEnumerable<Annonce> GetAllAnnonces()
         {
              return _context.Annonces.ToList();
@@ -34,7 +33,7 @@ namespace api.Controllers
         }*/
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAnnonceById([FromRoute] int id)
+        public async Task<IActionResult> GetAnnonceById( int id)
         {
             if(!ModelState.IsValid)
               return BadRequest(ModelState);
@@ -95,7 +94,7 @@ namespace api.Controllers
         // DELETE api/values/5
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAnnonce([FromRoute] int id)
+        public async Task<IActionResult> DeleteAnnonce( int id)
         {
             if(!ModelState.IsValid)
               return BadRequest(ModelState);
