@@ -18,9 +18,11 @@ namespace api.Controllers
         }
 
         [HttpGet("all")]
-        public IEnumerable<Annonce> GetAllAnnonces()
+        public IActionResult GetAllAnnonces()
         {
-             return _context.Annonces;
+             var annonces =  _context.Annonces.ToList();
+             return this.Ok(annonces);
+
         }
 
         [Authorize]
