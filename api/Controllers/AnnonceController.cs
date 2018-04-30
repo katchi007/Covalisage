@@ -23,7 +23,7 @@ namespace api.Controllers
         {
              return _context.Annonces.ToList();
         }
-
+//changement classe
        [Authorize]
         [HttpGet]
         public IEnumerable<Annonce> GetUserAnnonces()
