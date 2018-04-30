@@ -39,7 +39,7 @@ namespace api.Migrations.Covalisage
 
                     b.Property<int>("poidDisponible");
 
-                    b.Property<decimal>("prixKg");
+                    b.Property<double>("prixKg");
 
                     b.Property<string>("titre");
 

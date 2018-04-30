@@ -17,31 +17,19 @@ namespace api.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public IEnumerable<Annonce> GetAllAnnonces()
         {
-             return _context.Annonces.ToList();
+             return _context.Annonces;
         }
-//changement classe
-     /*  [Authorize]
+
+        [Authorize]
         [HttpGet]
         public IEnumerable<Annonce> GetUserAnnonces()
         {
             
             var userId = HttpContext.User.Claims.First().Value;
             return _context.Annonces.Where(a => a.UserId == userId);
-        }*/
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAnnonceById( int id)
-        {
-            if(!ModelState.IsValid)
-              return BadRequest(ModelState);
-            var annonce = await _context.Annonces.SingleOrDefaultAsync(a => a.Id == id);
-            if(annonce == null)
-               return NotFound();
-
-            return Ok(annonce);
         }
 
         // POST api/values

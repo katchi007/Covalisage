@@ -11,8 +11,8 @@ using System;
 namespace api.Migrations.Covalisage
 {
     [DbContext(typeof(CovalisageContext))]
-    [Migration("20180429131732_ColisComment")]
-    partial class ColisComment
+    [Migration("20180430180713_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace api.Migrations.Covalisage
 
                     b.Property<int>("poidDisponible");
 
-                    b.Property<decimal>("prixKg");
+                    b.Property<double>("prixKg");
 
                     b.Property<string>("titre");
 

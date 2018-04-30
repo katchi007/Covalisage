@@ -8,7 +8,7 @@ namespace api.Domain
         public string UserId { get; set; }
         public string titre { get; set; }
         public int poidDisponible { get; set; }
-        public decimal prixKg { get; set; }
+        public double prixKg { get; set; }
         public string dateDepart { get; set; }
         public string dateArrivee { get; set; }
         public string lieuDepart { get; set; }
