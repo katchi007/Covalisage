@@ -24,18 +24,17 @@ namespace api.Controllers
              return _context.Annonces.ToList();
         }
 //changement classe
-       [Authorize]
+     /*  [Authorize]
         [HttpGet]
         public IEnumerable<Annonce> GetUserAnnonces()
         {
             
             var userId = HttpContext.User.Claims.First().Value;
             return _context.Annonces.Where(a => a.UserId == userId);
-        }
+        }*/
 
-        // GET api/values/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAnnonceById(int id)
+        public async Task<IActionResult> GetAnnonceById([FromRoute] int id)
         {
             if(!ModelState.IsValid)
               return BadRequest(ModelState);
@@ -96,7 +95,7 @@ namespace api.Controllers
         // DELETE api/values/5
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAnnonce( int id)
+        public async Task<IActionResult> DeleteAnnonce([FromRoute] int id)
         {
             if(!ModelState.IsValid)
               return BadRequest(ModelState);
