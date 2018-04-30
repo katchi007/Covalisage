@@ -81,12 +81,12 @@ namespace api.Controllers
 
         // DELETE api/values/5
         [Authorize]
-        [HttpDelete]
-        public async Task<IActionResult> DeleteAnnonce([FromBody] Annonce ann)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAnnonce(int id)
         {
             if(!ModelState.IsValid)
               return BadRequest(ModelState);
-            var annonce =  _context.Annonces.SingleOrDefault(a => a.Id == ann.Id);
+            var annonce =  _context.Annonces.Find(id);
             if(annonce == null)
                return NotFound();
             _context.Annonces.Remove(annonce);
