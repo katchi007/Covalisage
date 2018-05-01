@@ -87,8 +87,12 @@ namespace api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAnnonce(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var userId = HttpContext.User.Claims.First().Value;
-            var annonce =  _context.Annonces.Find(id);
+            var annonce = await _context.Annonces.SingleOrDefaultAsync(m => m.Id == id);
             if(annonce == null)
                return NotFound();
             if(annonce.UserId == userId)
