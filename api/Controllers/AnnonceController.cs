@@ -27,11 +27,12 @@ namespace api.Controllers
 
         [Authorize]
         [HttpGet]
-        public IEnumerable<Annonce> GetUserAnnonces()
+        public IActionResult GetUserAnnonces()
         {
             
             var userId = HttpContext.User.Claims.First().Value;
-            return _context.Annonces.Where(a => a.UserId == userId);
+            var annonces =  _context.Annonces.Where(a => a.UserId == userId).ToList();
+            return this.Ok(annonces);
         }
 
         // POST api/values
@@ -93,7 +94,7 @@ namespace api.Controllers
                return NotFound();
             _context.Annonces.Remove(annonce);
             await _context.SaveChangesAsync();
-            return Ok(annonce);
+            return NoContent();
             
         }
 
