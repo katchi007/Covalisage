@@ -10,7 +10,7 @@ namespace api.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "ouss", "yoss" };
+            return new string[] { "marwen", "yoss" };
         }
 
         // GET api/values/5

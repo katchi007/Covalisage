@@ -85,6 +85,8 @@ namespace api.Controllers
         // DELETE api/values/5
         [Authorize]
         [HttpDelete("{id}")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteAnnonce(int id)
         {
             if (!ModelState.IsValid)
@@ -93,14 +95,15 @@ namespace api.Controllers
             }
             var userId = HttpContext.User.Claims.First().Value;
             var annonce = await _context.Annonces.SingleOrDefaultAsync(m => m.Id == id);
-            if(annonce == null)
-               return NotFound();
+            /*if(annonce == null)
+               return NotFound();*/
             if(annonce.UserId == userId)
                 _context.Annonces.Remove(annonce);
             else
                 return BadRequest();
             await _context.SaveChangesAsync();
-            return NoContent();
+            
+           return new NoContentResult();
             
         }
 
