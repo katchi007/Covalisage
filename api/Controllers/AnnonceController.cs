@@ -87,13 +87,20 @@ namespace api.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteAnnonce(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var userId = HttpContext.User.Claims.First().Value;
             var annonce = _context.Annonces.SingleOrDefault(m => m.Id == id);
+            if (annonce == null)
+            {
+                return NotFound();
+            }
             if(annonce.UserId == userId)
             {
                 _context.Annonces.Remove(annonce);
             }
-
             else 
             {
                 return BadRequest();
@@ -101,7 +108,7 @@ namespace api.Controllers
 
              _context.SaveChangesAsync();
             
-           return  NoContent();
+           return  Ok(annonce);
             
         }
 
